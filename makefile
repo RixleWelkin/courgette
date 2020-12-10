@@ -16,6 +16,9 @@ miniproj.o: miniproj.cpp
 Drawing.o: src/Drawing.cpp
 	g++ $(CFLAGS) -c src/Drawing.cpp $(LDFLAGS)
 
+Figure.o: src/Figure.cpp
+	g++ $(CFLAGS) -c src/Figure.cpp $(LDFLAGS)
+
 .PHONY: test clean
 
 clean:
