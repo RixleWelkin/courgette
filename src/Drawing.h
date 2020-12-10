@@ -4,7 +4,9 @@
 #include <string>
 #include <vector>
 
-class Drawing {
+class Drawing 
+{
+  
 public:
   Drawing(const int width, const int height);
   ~Drawing();

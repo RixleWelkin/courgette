@@ -25,7 +25,6 @@ void Drawing::save(std::string filename)
   {
     throw std::runtime_error("Drawing ne supporte que l'enregistrement d'images au format bmp");
   }
-
   createTestImage();
   stbi_write_bmp(filename.c_str(), width, height, 1, image.data());
 }
