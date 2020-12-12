@@ -9,7 +9,7 @@ const int height = 400;
 
 int main(int argc, char **argv)
 {
-  Figure draw(width, height);
+  Drawing draw(width, height);
 
   draw.save(std::string("test_image.bmp"));
 
