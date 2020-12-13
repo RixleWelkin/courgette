@@ -4,7 +4,7 @@ CFLAGS = -std=c++11 -g -I$(STB_INCLUDE_PATH) -Isrc
 LDFLAGS =
 
 APP = FigureCreator
-OBJ = miniproj.o Drawing.o Figure.o
+OBJ = miniproj.o Drawing.o
 
 
 $(APP): $(OBJ)
