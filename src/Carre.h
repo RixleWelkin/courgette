@@ -1,9 +1,9 @@
-class Carre : public Rect {
+class Carre : public Rectangle { // Un carre est un rectangle de meme cotes, carre herite donc de rectangle
 public:
-  Carre(const int size) : Rect(size, size) {}
+  Carre(const int size) : Rectangle(size, size) {}
 
   void draw() const {
-    std::cout << "Affichage d'un carrÃ© : " << std::endl << std::endl;
+    std::cout << "Affichage d'un carre : " << std::endl << std::endl;
     Figure::draw();
   }
 };

@@ -1,4 +1,4 @@
-class Segment : public Figure {
+class Segment {
 public:
   Segment(const Point &a, const Point &b);
   void translation(const Point &nouvOrg);
@@ -6,39 +6,35 @@ public:
 
   Point getOrigin() const;
   Point getDest() const;
-void Segment::drawSegment(const Segment &segment, const float thickness = 1.f) {
 
-    Point point1 = (segment.getDest().getX() < segment.getOrigin().getX())
-                       ? segment.getDest()
-                       : segment.getOrigin();
-
-
-    Point point2 = (point1.getX() == segment.getDest().getX())
-                       ? segment.getOrigin()
-                       : segment.getDest();
-
-
-    float dx = point1.getX() - point2.getX();
-    float dy = point1.getY() - point2.getY();
-
-
-    for (int x = point1.getX(); x <= point2.getX(); x++) {
-
-      for (int y = 0; y < height; y++) {
-        float dist;
-
-
-
-
-        if ((dx == 0) ||
-            (labs((float)y - (float)segment.getOrigin().getY() +
-                  (float)dy * (float)(x - segment.getDest().getX()) /
-                      (float)dx) < 1)) {
-          drawPoint(Point(x, y), thickness);
-        }
-      }
-    }
-  }
 private:
   Point org, ext;
 };
+
+
+Segment::Segment(const Point &a, const Point &b)
+    : org(a.getX(), a.getY()), ext(b.getX(), b.getY())
+
+{}
+
+void Segment::translation(const Point &nouvOrg) {
+
+  float dx = nouvOrg.getX() - org.getX();
+  float dy = nouvOrg.getY() - org.getY();
+
+  org.setX(nouvOrg.getX());
+  org.setY(nouvOrg.getY());
+
+  ext.setX(ext.getX() + dx);
+  ext.setY(ext.getY() + dy);
+}
+
+void Segment::afficher() const {
+  std::cout << "origine(" << org.getX() << "," << org.getY() << ")"
+            << ", extremite(" << ext.getX() << "," << ext.getY() << ")"
+            << std::endl;
+}
+
+Point Segment::getOrigin() const { return org; }
+
+Point Segment::getDest() const { return ext; }
