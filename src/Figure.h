@@ -18,9 +18,9 @@ protected:
   bool drawHorLine(const int line);
 
 protected:
-  int *buffer;
   int width;
   int height;
+  std::vector<char> figure;
 };
 
 #endif /* FIGURE_H */

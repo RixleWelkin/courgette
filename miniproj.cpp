@@ -18,13 +18,13 @@ const int height = 100;
 //
 int main(int argc, char **argv)
 {
-  const int width = 11;
-  const int height = 15;
-
-  Cross cross(width, height);
+  const int width = 500;
+  const int height = 500;
+ 
+  Croix cross(width, height);
   cross.draw();
 
-  Rectangle rectangle(width, height);
+  /*Rectangle rectangle(width, height);
   rectangle.draw();
 
   Carre carre(height);
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
   Figure figPoint(width, height);
   figPoint.drawPoint(point, 5);
   figPoint.draw();
-
+*/
   Drawing draw(width, height);
 
   draw.save(std::string("test_image.bmp"));

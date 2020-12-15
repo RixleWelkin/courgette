@@ -28,6 +28,14 @@ void Drawing::save(std::string filename)
   stbi_write_bmp(filename.c_str(), width, height, 1, image.data());
 }
 
+void Drawing::draw(){
+    for (int line = 0; line < height; line++) {
+      for (int col = 0; col < width; col++) {
+        //figure[line * width + col]=(line+col) % 256;
+      }
+    }
+  }
+
 //            _             _                      _    _           _
 //  ___  _ _ <_> _ _  ___ _| |_ ___  ._ _ _  ___ _| |_ | |_  ___  _| | ___
 // | . \| '_>| || | |<_> | | | / ._> | ' ' |/ ._> | |  | . |/ . \/ . |<_-<

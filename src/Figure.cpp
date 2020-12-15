@@ -45,24 +45,17 @@ Point Segment::getDest() const { return ext; }
 // |  _/`___||___/|_||_|\_|_. |_|_|_|\___. |_|  |_|_|\___/\___|/__/
 // |_|
 Figure::Figure(const int width, const int height) : width(width), height(height) {
-    buffer = new int[width * height];
-    clearBuffer();
+    figure.resize(width * height);
   }
 
-Figure::~Figure() {
-    if (buffer != nullptr) {
-      delete buffer;
-    }
-  }
+Figure::~Figure() {}
 
 void Figure::draw() const {
     for (int line = 0; line < height; line++) {
       for (int col = 0; col < width; col++) {
-        std::cout << buffer[line * width + col] << " ";
+        //figure[line * width + col]=(line+col) % 256;
       }
-      std::cout << std::endl;
     }
-    std::cout << std::endl;
   }
 
 void Figure::drawPoint(const Point &point, const float thickness = 1) {
@@ -117,7 +110,7 @@ void Figure::drawSegment(const Segment &segment, const float thickness = 1.f) {
     if (col < 0 || col >= width || line < 0 || line >= height) {
       return false;
     }
-    buffer[line * width + col] = 1;
+    figure[line * width + col] = 255;
     return true;
   }
 
@@ -125,17 +118,10 @@ void Figure::drawSegment(const Segment &segment, const float thickness = 1.f) {
     if (col < 0 || col >= width || line < 0 || line >= height) {
       return false;
     }
-    buffer[line * width + col] = 0;
+    figure[line * width + col] = 0;
     return true;
   }
 
-    void Figure::clearBuffer() {
-    for (int line = 0; line < height; line++) {
-      for (int col = 0; col < width; col++) {
-        buffer[line * width + col] = 0;
-      }
-    }
-  }
 
     bool Figure::drawVertLine(const int col) {
     if (col < 0 || col >= width) {
@@ -183,7 +169,7 @@ Rectangle::Rectangle(const int width, const int height): Figure(width, height){
     drawSegment(Segment(pointBasGauche, pointHautGauche));
   }
 
-  Cross::Cross(const int width, const int height): Figure(width, height){
+  Croix::Croix(const int width, const int height): Figure(width, height){
     drawSegment(Segment(Point(width / 2, 0), Point(width / 2, height - 1)));
     drawSegment(Segment(Point(0, height / 2), Point(width - 1, height / 2)));
   }

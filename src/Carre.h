@@ -5,7 +5,6 @@ public:
   Carre(const int size) : Rectangle(size, size) {}
 
   void draw() const {
-    std::cout << "Affichage d'un carre : " << std::endl << std::endl;
     Figure::draw();
   }
 };
