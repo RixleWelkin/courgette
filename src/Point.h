@@ -1,9 +1,8 @@
+#ifndef POINT_H
+#define POINT_H
 class Point {
 public:
-  Point(float x0, float y0) {
-    x = x0;
-    y = y0;
-  }
+  Point(float x0, float y0);
 
   float getX() const { return x; }
   float getY() const { return y; }
@@ -14,3 +13,5 @@ public:
 private:
   float x, y;
 };
+#endif /* POINT_H */
+

@@ -1,10 +1,11 @@
+
 STB_INCLUDE_PATH = ./extern/stb
 
 CFLAGS = -std=c++11 -g -I$(STB_INCLUDE_PATH) -Isrc
 LDFLAGS =
 
 APP = FigureCreator
-OBJ = miniproj.o Drawing.o
+OBJ = Drawing.o miniproj.o Figure.o
 
 
 $(APP): $(OBJ)

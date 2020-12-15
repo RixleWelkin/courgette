@@ -1,10 +1,44 @@
 #include <iostream>
+#include "Drawing.h"
 #include "Point.h"
 #include "Segment.h"
 #include "Figure.h"
-
+#include "Croix.h"
+#include "Rectangle.h"
+#include "Carre.h"
 inline float min(float x, float y) { return (x < y) ? x : y; }
 inline float max(float x, float y) { return (x >= y) ? x : y; }
+Segment::Segment(const Point &a, const Point &b)
+    : org(a.getX(), a.getY()), ext(b.getX(), b.getY())
+
+{}
+
+void Segment::translation(const Point &nouvOrg) {
+
+  float dx = nouvOrg.getX() - org.getX();
+  float dy = nouvOrg.getY() - org.getY();
+
+  org.setX(nouvOrg.getX());
+  org.setY(nouvOrg.getY());
+
+  ext.setX(ext.getX() + dx);
+  ext.setY(ext.getY() + dy);
+}
+
+ Point::Point(float x0, float y0) {
+    x = x0;
+    y = y0;
+  }
+
+void Segment::afficher() const {
+  std::cout << "origine(" << org.getX() << "," << org.getY() << ")"
+            << ", extremite(" << ext.getX() << "," << ext.getY() << ")"
+            << std::endl;
+}
+
+Point Segment::getOrigin() const { return org; }
+
+Point Segment::getDest() const { return ext; }
 //            _    _  _                     _    _           _
 //  ___  _ _ | |_ | |<_> ___  ._ _ _  ___ _| |_ | |_  ___  _| | ___
 // | . \| | || . \| || |/ | ' | ' ' |/ ._> | |  | . |/ . \/ . |<_-<
@@ -74,10 +108,6 @@ void Figure::drawSegment(const Segment &segment, const float thickness = 1.f) {
     }
   }
 
-//Classes derivees utilisant drawSegment
-#include "Croix.h"
-#include "Rectangle.h"
-#include "Carre.h"
 // ___            _             _            _        __  __       _    _             _     
 //| _ \ _ _  ___ | |_  ___  __ | |_  ___  __| |      |  \/  | ___ | |_ | |_   ___  __| | ___
 //|  _/| '_|/ _ \|  _|/ -_)/ _||  _|/ -_)/ _` |      | |\/| |/ -_)|  _||   \ / _ \/ _` |(_-/
@@ -134,29 +164,26 @@ void Figure::drawSegment(const Segment &segment, const float thickness = 1.f) {
     }
     return true;
   }
-// __  __        _       
-//|  \/  | __ _ (_) _ _  
-//| |\/| |/ _` || || ' \ 
-//|_|  |_|\__/_||_||_||_|
 
-int main(int, char **) {
-  const int width = 11;
-  const int height = 15;
+//Classes derivees utilisant drawSegment
+//  ___  _                               ___             _                    
+// / __|| | __ _  ___ ___ ___  ___      |   \  ___  _ _ (_)__ __ ___  ___  ___
+//| (__ | |/ _` |(_-/(_-// -_)(_-/      | |) |/ -_)| '_|| |\ V // -_)/ -_)(_-/
+ //\___||_|\__/_|/__//__/\___|/__/      |___/ \___||_|  |_| \_/ \___|\___|/__/
 
-  Cross cross(width, height);
-  cross.draw();
+Rectangle::Rectangle(const int width, const int height): Figure(width, height){
+    Point pointHautGauche(0, 0);
+    Point pointHautDroit(width - 1, 0);
+    Point pointBasGauche(0, height - 1);
+    Point pointBasDroit(width - 1, height - 1);
 
-  Rectangle rectangle(width, height);
-  rectangle.draw();
+    drawSegment(Segment(pointHautGauche, pointHautDroit));
+    drawSegment(Segment(pointHautDroit, pointBasDroit));
+    drawSegment(Segment(pointBasDroit, pointBasGauche));
+    drawSegment(Segment(pointBasGauche, pointHautGauche));
+  }
 
-  Carre carre(height);
-  carre.draw();
-
-  Point point(width / 2, height / 2);
-
-  Figure figPoint(width, height);
-  figPoint.drawPoint(point, 5);
-  figPoint.draw();
-
-  return 0;
-}
+  Cross::Cross(const int width, const int height): Figure(width, height){
+    drawSegment(Segment(Point(width / 2, 0), Point(width / 2, height - 1)));
+    drawSegment(Segment(Point(0, height / 2), Point(width - 1, height / 2)));
+  }

@@ -1,4 +1,5 @@
-
+#ifndef FIGURE_H
+#define FIGURE_H
 class Figure {
 public:
   Figure(const int width, const int height);
@@ -21,3 +22,5 @@ protected:
   int width;
   int height;
 };
+
+#endif /* FIGURE_H */

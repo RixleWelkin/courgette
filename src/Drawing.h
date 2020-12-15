@@ -15,6 +15,7 @@ class Drawing
   private:
     void clearImage();
     void createTestImage();
+    void createFigureImage();
 
   private:
     const int width;

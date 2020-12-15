@@ -1,3 +1,5 @@
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
 class Rectangle : public Figure {
 public:
   Rectangle(const int width, const int height);
@@ -8,14 +10,4 @@ public:
   }
 };
 
-Rectangle::Rectangle(const int width, const int height) : Figure(width, height) {
-    Point pointHautGauche(0, 0);
-    Point pointHautDroit(width - 1, 0);
-    Point pointBasGauche(0, height - 1);
-    Point pointBasDroit(width - 1, height - 1);
-
-    drawSegment(Segment(pointHautGauche, pointHautDroit));
-    drawSegment(Segment(pointHautDroit, pointBasDroit));
-    drawSegment(Segment(pointBasDroit, pointBasGauche));
-    drawSegment(Segment(pointBasGauche, pointHautGauche));
-  }
+  #endif /* RECTANGLE_H */
