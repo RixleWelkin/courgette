@@ -8,7 +8,7 @@
 #include <sstream>
 #include <limits>
 #include <cctype>
-#include "menu.h"
+#include "Menu.h"
 
 
 //All menu lines
