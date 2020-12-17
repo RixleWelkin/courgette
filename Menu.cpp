@@ -26,7 +26,7 @@ std::string main_line[10] =
     "Figure position menu",
     "Figure size menu",
     "Image size menu",
-    "Draw and Save",
+    "0",
     "0",
     "0",
     "Select the desired menu"
@@ -256,7 +256,12 @@ void Menu::print_menu()
     for(int i = 1; menu_line[i] != "0"; i++)
         std::cout<<i<<" : "<<menu_line[i]<<std::endl;
     if(is_end == false)
-        std::cout<<std::endl<<"0 : Return"<<std::endl<<std::endl;
+    {
+        if(menu_ID != 0)
+            std::cout<<std::endl<<"0 : Return"<<std::endl<<std::endl;
+        else
+            std::cout<<std::endl<<"0 : Draw and save"<<std::endl<<std::endl;
+    }
 }
 
 int Menu::get_user_choice()
@@ -370,13 +375,16 @@ int main(int argc, char **argv)
     menu_list[9].fig_value=100;
     menu_list[10].fig_value=500;
     menu_list[11].fig_value=500;
-   
-    menu_list[0].start_menu(menu_list);
 
-    std::cout<<std::endl;
-    for(int i = 0; i < 12; i++)
-        std::cout<<menu_list[i].fig_value<<std::endl;
-    std::cout<<std::endl;
+    int add_figure = 1;
+
+    while(add_figure == 1)
+    {
+        menu_list[0].start_menu(menu_list);
+        std::cout<<"Add figure to image ?"<<std::endl;
+        std::cin>>add_figure;
+    }
+    
     Drawing draw(menu_list[10].fig_value, menu_list[11].fig_value);
     switch(menu_list[1].fig_value)
     {
