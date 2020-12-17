@@ -21,17 +21,23 @@ class Menu
     int menu_ID;
     int accepted_input_limit;
     std::string menu_line[10];
+    int fig_value;
+    bool is_end;
 
-    void setID(const int ID){menu_ID = ID;}
-    void setlimit(const int limit){accepted_input_limit = limit;}
-    void setlines(const std::string *lines){*menu_line = *lines;}
+    void setID(int ID);
+    void setlimit(int limit);
+    void setend(bool ends);
+    void setvalue();
+    void setlines(std::string **lines);
+
+    void print_menu();
+    void assign_value(int user_input, Menu *menu_list);
+    int get_user_choice();
+    int menu_switch(int user_input);
+    bool start_menu(Menu *menu_list);
 
   private:
-    void print_menu(const std::string *menu_line);
-    int get_user_choice(Menu *menu_list, int *menu_ID);
-    bool start_menu(Menu *menu_list, int *menu_ID);
 
-    int user_input;
 
   protected:
   

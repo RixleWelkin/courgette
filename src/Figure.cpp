@@ -1,9 +1,11 @@
 #include <iostream>
+#include <cmath>
 class Drawing;
 #include "Figure.h"
 #include "Croix.h"
 #include "Rectangle.h"
 #include "Carre.h"
+#include "Triangle.h"
 #include "Drawing.h"
 
 inline float min(float x, float y) { return (x < y) ? x : y; }
@@ -188,4 +190,14 @@ Rectangle::Rectangle(const int largeur, const int hauteur): Figure(largeur, haut
   Croix::Croix(const int largeur, const int hauteur): Figure(largeur, hauteur){
     drawSegment(Segment(Point(largeur / 2, 0), Point(largeur / 2, hauteur - 1)));
     drawSegment(Segment(Point(0, hauteur / 2), Point(largeur - 1, hauteur / 2)));
+  }
+
+Triangle::Triangle(const int largeur, const int hauteur): Figure(largeur, hauteur){
+    Point pointBasGauche(0, 0);
+    Point pointBasDroit(largeur-1, 0);
+    Point pointHaut((largeur/2)-1,(1.73/2)*largeur-1);
+    drawSegment(Segment(pointBasGauche, pointBasDroit));
+    drawSegment(Segment(pointBasDroit, pointHaut));
+    drawSegment(Segment(pointHaut, pointBasGauche));
+    
   }
