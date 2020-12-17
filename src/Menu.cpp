@@ -88,17 +88,17 @@ int Menu::main_menu()
 {
     int menu_select = 0;
 
-    std::cout<<std::endl<<std::endl<<"-----Figure type menu-----"<<std::endl<<std::endl;
+    std::cout<<std::endl<<std::endl<<"-----Main menu-----"<<std::endl<<std::endl;
     while (menu_select !=1 && menu_select !=2 && menu_select !=3)
     {
-        std::cout<<"Select the desired figure : "<<std::endl;
+        std::cout<<"Select the desired menu : "<<std::endl;
         std::cout<<"1 : Figure type menu"<<std::endl;
         std::cout<<"2 : Figure orientation menu"<<std::endl;
         std::cout<<"3 : Figure position menu"<<std::endl;
         std::cout<<"4 : Figure size menu"<<std::endl;
         std::cout<<"5 : Image size menu"<<std::endl;
-        std::cout<<"8 : Save (not available yet)"<<std::endl;
-        std::cout<<"9 : Draw (not available yet)"<<std::endl;
+        std::cout<<"6 : Save (not available yet)"<<std::endl;
+        std::cout<<"7 : Draw (not available yet)"<<std::endl;
         menu_select = get_user_choice();
         if(menu_select !=1 && menu_select !=2 && menu_select !=3)
             std::cout<<std::endl<<std::endl<<"Input error, try again"<<std::endl<<std::endl;
