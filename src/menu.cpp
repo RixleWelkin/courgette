@@ -220,7 +220,6 @@ void Menu::setlimit(int limit)
 void Menu::setend(bool ends)
 {
     is_end = ends;
-    std::cout<<is_end<<std::endl;
 }
 
 void Menu::setlines(std::string **lines)
