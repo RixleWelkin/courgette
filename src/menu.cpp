@@ -12,7 +12,7 @@
 
 
 //All menu lines
-const std::string main_line[10] = 
+std::string main_line[10] = 
 {
     "Main menu",
     "Figure type menu",
@@ -22,11 +22,11 @@ const std::string main_line[10] =
     "Image size menu",
     "Save (not available yet)",
     "Draw (not available yet)",
-    NULL,
-    "Select the desired menu : "
+    "0",
+    "Select the desired menu"
 };
 
-const std::string figure_type_line[10] = 
+std::string figure_type_line[10] = 
 {
     "Figure type menu",
     "Rectangle",
@@ -34,66 +34,150 @@ const std::string figure_type_line[10] =
     "Cross",
     "Segment",
     "Point",
-    NULL,
-    NULL,
-    NULL,
-    "Select the desired figure : "
+    "0",
+    "0",
+    "0",
+    "Select the desired figure"
 };
 
-const std::string figure_orientation_line[10] = 
+std::string figure_orientation_line[10] = 
 {
     "Figure orientation menu",
     "Straight",
     "Diagonal",
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    "Select the desired orientation : "
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "Select the desired orientation"
 };
 
-const std::string figure_position_line[10] = 
+std::string figure_position_line[10] = 
 {
     "Figure position menu",
     "Horizontal",
     "Vertical",
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    "Select what you whant to set : ",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "Select what you whant to set",
 };
 
-const std::string figure_size_line[10] = 
+std::string figure_size_line[10] = 
 {
     "Figure size menu",
     "Width",
     "Height",
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    "Select what you whant to set : "
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "Select what you whant to set"
 };
 
-const std::string image_size_line[10] = 
+std::string image_size_line[10] = 
 {
     "Image size menu",
     "Width",
     "Height",
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    "Select what you whant to set : "
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "Select what you whant to set"
+};
+
+std::string figure_horizontal_line[10] = 
+{
+    "Figure horizontal position",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "Type in the desired value"
+};
+
+std::string figure_vertical_line[10] = 
+{
+    "Figure vertical position",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "Type in the desired value"
+};
+
+std::string figure_width_line[10] = 
+{
+    "Figure width",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "Type in the desired value"
+};
+
+std::string figure_height_line[10] = 
+{
+    "Figure height",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "Type in the desired value"
+};
+
+std::string image_width_line[10] = 
+{
+    "Image width",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "Type in the desired value"
+};
+
+std::string image_height_line[10] = 
+{
+    "Image height",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "Type in the desired value"
 };
 //All menu lines
 
@@ -123,85 +207,183 @@ Menu::Menu(){}
 
 Menu::~Menu(){}
 
+void Menu::setID(int ID)
+{
+    menu_ID = ID;
+}
+
+void Menu::setlimit(int limit)
+{
+    accepted_input_limit = limit;
+}
+
+void Menu::setend(bool ends)
+{
+    is_end = ends;
+    std::cout<<is_end<<std::endl;
+}
+
+void Menu::setlines(std::string **lines)
+{
+    std::string *line;
+    line = *lines;
+
+    for(int i = 0; i < 10; i++)
+        menu_line[i] = line[i];
+}
+
+
 //            _             _                      _    _           _
 //  ___  _ _ <_> _ _  ___ _| |_ ___  ._ _ _  ___ _| |_ | |_  ___  _| | ___
 // | . \| '_>| || | |<_> | | | / ._> | ' ' |/ ._> | |  | . |/ . \/ . |<_-<
 // |  _/|_|  |_||__/ <___| |_| \___. |_|_|_|\___. |_|  |_|_|\___/\___|/__/
 // |_|
 
-void Menu::print_menu(const std::string *menu_line)
+void Menu::print_menu()
 {
     std::cout<<std::endl<<std::endl<<"----------"<<menu_line[0]<<"----------"<<std::endl<<std::endl;
     std::cout<<menu_line[9]<<" : "<<std::endl;
-    for(int i = 1; menu_line[i] != NULL; i++)
+    for(int i = 1; menu_line[i] != "0"; i++)
         std::cout<<i<<" : "<<menu_line[i]<<std::endl;
-    std::cout<<std::endl<<"0) Return"<<std::endl<<std::endl;
+    std::cout<<std::endl<<"0 : Return"<<std::endl<<std::endl;
 }
 
-int get_user_choice(Menu *menu_list, int *menu_ID)
+void Menu::assign_value(int user_input)
+{
+    switch (menu_ID)
+    {
+            break;
+        case 1 :
+            Fig_Type = user_input;
+            break;
+        case 2 :
+            Fig_Orientation = user_input;
+            break;
+        case 6 :
+            Fig_HPosition = user_input;
+            break;
+        case 7 :
+            Fig_VPossition = user_input;
+            break;
+        case 8 :
+            Fig_Width = user_input;
+            break;
+        case 9 :
+            Fig_Height = user_input;
+            break;
+        case 10 :
+            Im_Width = user_input;
+            break;
+        case 11 :
+            Im_Height = user_input;
+            break;
+    }
+}
+
+int Menu::get_user_choice()
 {
     int user_input = 0;
 
-    if(!(std::cin >> user_input) || user_input < 0 || user_input > menu_list[*menu_ID]::accepted_input_limit)
+    if(!(std::cin >> user_input) || user_input < 0 || user_input > accepted_input_limit)
     {
         std::cout<<std::endl<<"Invalid input, please try again"<<std::endl<<std::endl;
-        print_menu(menu_line);
-        user_input = get_user_choice(accepted_input_limit, menu_line);
+        print_menu();
+        user_input = get_user_choice();
     }
+
+    if(is_end == true)
+        assign_value(user_input);
 
     return user_input;
 }
 
-bool Menu::start_menu(Menu *menu_list, int *ID)
+int Menu::menu_switch(int user_input)
+{
+    switch (menu_ID)
+    {
+        case 0 :
+            return user_input;
+            break;
+        case 3 :
+            if(user_input == 1)
+                return 6;
+            else
+                return 7;
+            break;
+        case 4 :
+            if(user_input == 1)
+                return 8;
+            else
+                return 9;
+            break;
+        case 5 :
+            if(user_input == 1)
+                return 10;
+            else
+                return 11;
+            break;
+    }
+    return 0;
+}
+
+bool Menu::start_menu(Menu *menu_list)
 {
     int next_menu;
     bool retour;
-    print_menu(menu_line);
-    user_input = get_user_choice(menu_list, menu_ID);
+    print_menu();
+    int user_input = get_user_choice();
 
     if(user_input == 0)
         return false;
     else
     {
-        next_menu = user_input;
-        retour = start_menu(menu_list, menu_ID);
+        if(is_end == false)
+        {
+            next_menu = menu_switch(user_input);
+            retour = menu_list[user_input].start_menu(menu_list);
+        }
+        else
+            retour = false;
     }
 
     if(retour == false)
-        retour = start_menu(menu_list, menu_ID);
+        return start_menu(menu_list);
     else
         return true;
 }
 
 int main(int argc, char **argv)
 {
-    /*
-    Menu main_menu(0, 5, main_line);
-    Menu figure_type_menu(1, 5, figure_type_line);
-    Menu figure_orientation_menu(2, 2, figure_orientation_line);
-    Menu figure_position_menu(3, 2, figure_position_line);
-    Menu figure_size_menu(4, 2, figure_size_line);
-    Menu image_size_menu(5, 2, image_size_line);
-    */
-
-    const int IDs[6] = {0, 1, 2, 3, 4, 5};
-    const int limits[6] = {5, 5, 2, 2, 2, 2};
-    const std::string *lines[6] = 
+    int IDs[12] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    bool ends[12] = {false, true, true, false, false, false, true, true, true, true, true, true};
+    int limits[12] = {5, 5, 2, 2, 2, 2, 10000, 10000, 10000, 10000, 10000, 10000};
+    std::string *lines[12] = 
     {
         main_line,
         figure_type_line,
         figure_orientation_line,
         figure_position_line,
         figure_size_line,
-        image_size_line
+        image_size_line,
+        figure_horizontal_line,
+        figure_vertical_line,
+        figure_width_line,
+        figure_height_line,
+        image_width_line,
+        image_height_line
     };
 
-    Menu menu_list[6];
+    Menu menu_list[12];
 
-    for(int i = 0; i <= 5; i++)
+    for(int i = 0; i < 12; i++)
     {
         menu_list[i].setID(IDs[i]);
         menu_list[i].setlimit(limits[i]);
-        menu_list[i].setlines(lines[i]);
+        menu_list[i].setend(ends[i]);
+        menu_list[i].setlines(&lines[i]);
     }
+
+    menu_list[0].start_menu(menu_list);
+
+    return 0;
 }
