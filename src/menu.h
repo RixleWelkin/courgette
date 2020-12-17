@@ -30,7 +30,7 @@ class Menu
     void setlines(std::string **lines);
 
     void print_menu();
-    void assign_value(int user_input);
+    void assign_value(int user_input, Menu *menu_list);
     int get_user_choice();
     int menu_switch(int user_input);
     bool start_menu(Menu *menu_list);

@@ -247,34 +247,34 @@ void Menu::print_menu()
     std::cout<<std::endl<<"0 : Return"<<std::endl<<std::endl;
 }
 
-void Menu::assign_value(int user_input)
+void Menu::assign_value(int user_input, Menu *menu_list)
 {
     switch (menu_ID)
     {
             break;
         case 1 :
-            Fig_value[0] = user_input;
+            menu_list[0].Fig_value[0] = user_input;
             break;
         case 2 :
-            Fig_value[1] = user_input;
+            menu_list[0].Fig_value[1] = user_input;
             break;
         case 6 :
-            Fig_value[2] = user_input;
+            menu_list[0].Fig_value[2] = user_input;
             break;
         case 7 :
-            Fig_value[3] = user_input;
+            menu_list[0].Fig_value[3] = user_input;
             break;
         case 8 :
-            Fig_value[4] = user_input;
+            menu_list[0].Fig_value[4] = user_input;
             break;
         case 9 :
-            Fig_value[5] = user_input;
+            menu_list[0].Fig_value[5] = user_input;
             break;
         case 10 :
-            Fig_value[6] = user_input;
+            menu_list[0].Fig_value[6] = user_input;
             break;
         case 11 :
-            Fig_value[7] = user_input;
+            menu_list[0].Fig_value[7] = user_input;
             break;
     }
 }
@@ -328,7 +328,7 @@ bool Menu::start_menu(Menu *menu_list)
 
     if(is_end == true)
     {
-        assign_value(user_input);
+        assign_value(user_input, menu_list);
         return false;
     }
 
