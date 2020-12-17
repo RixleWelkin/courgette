@@ -22,11 +22,11 @@ std::string main_line[10] =
 {
     "Main menu",
     "Figure type menu",
-    "Figure orientation menu",
+    "Figure orientation menu (Doesn't work, bonus feature)",
     "Figure position menu",
     "Figure size menu",
     "Image size menu",
-    "Draw and Save",
+    "0",
     "0",
     "0",
     "Select the desired menu"
@@ -36,7 +36,7 @@ std::string figure_type_line[10] =
 {
     "Figure type menu",
     "Rectangle",
-    "Triangle",
+    "Triangle (Looks a bit weird but we don't judge)",
     "Cross",
     "Square",
     "Point",
@@ -256,7 +256,12 @@ void Menu::print_menu()
     for(int i = 1; menu_line[i] != "0"; i++)
         std::cout<<i<<" : "<<menu_line[i]<<std::endl;
     if(is_end == false)
-        std::cout<<std::endl<<"0 : Return"<<std::endl<<std::endl;
+    {
+        if(menu_ID != 0)
+            std::cout<<std::endl<<"0 : Return"<<std::endl<<std::endl;
+        else
+            std::cout<<std::endl<<"0 : Draw the figure"<<std::endl<<std::endl;
+    }
 }
 
 int Menu::get_user_choice()
@@ -294,9 +299,6 @@ int Menu::menu_switch(int user_input)
                 return 10;
             else
                 return 11;
-            break;
-        case 6 :
-                return 0;
             break;
         default :
             return user_input;
@@ -366,18 +368,21 @@ int main(int argc, char **argv)
     }
     //Default values
     menu_list[1].fig_value=0;
+    menu_list[6].fig_value=250;
+    menu_list[7].fig_value=250;
     menu_list[8].fig_value=100;
     menu_list[9].fig_value=100;
     menu_list[10].fig_value=500;
     menu_list[11].fig_value=500;
+    
    
-    menu_list[0].start_menu(menu_list);
-
-    std::cout<<std::endl;
-    for(int i = 0; i < 12; i++)
-        std::cout<<menu_list[i].fig_value<<std::endl;
-    std::cout<<std::endl;
+    int add_figure = 1;
     Drawing draw(menu_list[10].fig_value, menu_list[11].fig_value);
+    while(add_figure == 1)
+    {
+        menu_list[0].start_menu(menu_list);
+        std::cout<<"Add another figure to image ? (1 = Yes | 0 = No)"<<std::endl;
+        std::cin>>add_figure;
     switch(menu_list[1].fig_value)
     {
         case 1:
@@ -412,8 +417,14 @@ int main(int argc, char **argv)
             draw.DrawCanva(figPoint.figure,figPoint.hauteur,figPoint.largeur,menu_list[6].fig_value,menu_list[7].fig_value);
             break;
         }
-
     };
+    }
+    //Debug values
+    /*std::cout<<std::endl;
+    for(int i = 0; i < 12; i++)
+        std::cout<<menu_list[i].fig_value<<std::endl;
+    std::cout<<std::endl;*/ 
+    
     draw.save(std::string("test_image.bmp"));
     return 0;
 }

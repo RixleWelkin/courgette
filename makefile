@@ -5,14 +5,11 @@ CFLAGS = -std=c++11 -g -I$(STB_INCLUDE_PATH) -Isrc
 LDFLAGS =
 
 APP = FigureCreator
-OBJ = Drawing.o Figure.o miniproj.o Menu.o
+OBJ = Drawing.o Figure.o Menu.o
 
 
 $(APP): $(OBJ)
 	g++ $(CFLAGS) -o $(APP) $(OBJ) $(LDFLAGS)
-
-miniproj.o: miniproj.cpp
-	g++ $(CFLAGS) -c miniproj.cpp $(LDFLAGS)
 
 Drawing.o: src/Drawing.cpp
 	g++ $(CFLAGS) -c src/Drawing.cpp $(LDFLAGS)

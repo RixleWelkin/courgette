@@ -23,12 +23,7 @@ Figure::Figure(const int largeur, const int hauteur) : Drawing(width, height),la
 
 Figure::~Figure() {}
 
-void Figure::draw() const {
-    for (int line = 0; line < hauteur; line++) {
-      for (int col = 0; col < largeur; col++) {
-       // figure[line * largeur + col]=(line+col) % 256;
-      }
-    }
+void Figure::draw() const { //Premier prototype d'impression dans l'invite de commande pour debugging
   }
 
 void Figure::drawPoint(const Point &point, const float thickness = 1) {
@@ -80,7 +75,9 @@ void Figure::drawPoint(const Point &point, const float thickness = 1) {
 
   Segment::Segment(const Point &a, const Point &b) : org(a.getX(), a.getY()), ext(b.getX(), b.getY())
 
-{afficher();}
+{
+  //afficher(); //Debug coordinates
+}
 
 void Segment::translation(const Point &nouvOrg) {
 
@@ -108,9 +105,7 @@ void Segment::afficher() const {
 Point Segment::getOrigin() const { return org; }
 
 Point Segment::getDest() const { return ext; }
-  //void drawCanva() {
-  //Drawing::drawCanva();
-  //}
+
 // ___            _             _            _        __  __       _    _             _     
 //| _ \ _ _  ___ | |_  ___  __ | |_  ___  __| |      |  \/  | ___ | |_ | |_   ___  __| | ___
 //|  _/| '_|/ _ \|  _|/ -_)/ _||  _|/ -_)/ _` |      | |\/| |/ -_)|  _||   \ / _ \/ _` |(_-/
@@ -192,12 +187,13 @@ Rectangle::Rectangle(const int largeur, const int hauteur): Figure(largeur, haut
     drawSegment(Segment(Point(0, hauteur / 2), Point(largeur - 1, hauteur / 2)));
   }
 
-Triangle::Triangle(const int largeur, const int hauteur): Figure(largeur, hauteur){
-    Point pointBasGauche(0, 0);
-    Point pointBasDroit(largeur-1, 0);
-    Point pointHaut((largeur/2)-1,(1.73/2)*largeur-1);
-    drawSegment(Segment(pointBasGauche, pointBasDroit));
-    drawSegment(Segment(pointBasDroit, pointHaut));
-    drawSegment(Segment(pointHaut, pointBasGauche));
+Triangle::Triangle(const int largeur, const int hauteur): Figure(largeur, hauteur){ //Ne fonctionne pas :(
+    Point pointHaut(largeur/2,largeur);
+    Point pointBasGauche(0,0);
+    Point pointBasDroit(largeur-1,0);
+
+    drawSegment(Segment(pointBasDroit, pointBasGauche));
+    drawSegment(Segment(pointBasGauche, pointHaut));
+    drawSegment(Segment(pointHaut, pointBasDroit));
     
   }
