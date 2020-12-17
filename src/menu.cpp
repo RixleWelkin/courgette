@@ -253,28 +253,28 @@ void Menu::assign_value(int user_input)
     {
             break;
         case 1 :
-            Fig_Type = user_input;
+            Fig_value[0] = user_input;
             break;
         case 2 :
-            Fig_Orientation = user_input;
+            Fig_value[1] = user_input;
             break;
         case 6 :
-            Fig_HPosition = user_input;
+            Fig_value[2] = user_input;
             break;
         case 7 :
-            Fig_VPossition = user_input;
+            Fig_value[3] = user_input;
             break;
         case 8 :
-            Fig_Width = user_input;
+            Fig_value[4] = user_input;
             break;
         case 9 :
-            Fig_Height = user_input;
+            Fig_value[5] = user_input;
             break;
         case 10 :
-            Im_Width = user_input;
+            Fig_value[6] = user_input;
             break;
         case 11 :
-            Im_Height = user_input;
+            Fig_value[7] = user_input;
             break;
     }
 }
@@ -290,9 +290,6 @@ int Menu::get_user_choice()
         user_input = get_user_choice();
     }
 
-    if(is_end == true)
-        assign_value(user_input);
-
     return user_input;
 }
 
@@ -300,9 +297,6 @@ int Menu::menu_switch(int user_input)
 {
     switch (menu_ID)
     {
-        case 0 :
-            return user_input;
-            break;
         case 3 :
             if(user_input == 1)
                 return 6;
@@ -332,17 +326,22 @@ bool Menu::start_menu(Menu *menu_list)
     print_menu();
     int user_input = get_user_choice();
 
+    if(is_end == true)
+    {
+        assign_value(user_input);
+        return false;
+    }
+
     if(user_input == 0)
         return false;
     else
     {
-        if(is_end == false)
-        {
-            next_menu = menu_switch(user_input);
-            retour = menu_list[user_input].start_menu(menu_list);
-        }
-        else
-            retour = false;
+        std::cout<<std::endl<<"user input pre switch = "<<user_input<<std::endl<<std::endl;
+        std::cout<<std::endl<<"menu ID pre switch = "<<menu_ID<<std::endl<<std::endl;
+        next_menu = menu_switch(user_input);
+        std::cout<<std::endl<<"user input post switch = "<<user_input<<std::endl<<std::endl;
+        std::cout<<std::endl<<"menu_ID post switch = "<<menu_ID<<std::endl<<std::endl;
+        retour = menu_list[user_input].start_menu(menu_list);
     }
 
     if(retour == false)
@@ -383,6 +382,18 @@ int main(int argc, char **argv)
     }
 
     menu_list[0].start_menu(menu_list);
+
+
+    std::cout<<std::endl<<std::endl
+    <<std::endl<<"Fig_Type = "<<Fig_Type
+    <<std::endl<<"Fig_Orientation = "<<Fig_Orientation
+    <<std::endl<<"Fig_HPosition = "<<Fig_HPosition
+    <<std::endl<<"Fig_VPossition = "<<Fig_VPossition
+    <<std::endl<<"Fig_Width = "<<Fig_Width
+    <<std::endl<<"Fig_Height = "<<Fig_Height
+    <<std::endl<<"Im_Width = "<<Im_Width
+    <<std::endl<<"Im_Height = "<<Im_Height
+    <<std::endl<<std::endl;
 
     return 0;
 }

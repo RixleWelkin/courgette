@@ -21,7 +21,7 @@ class Menu
     int menu_ID;
     int accepted_input_limit;
     std::string menu_line[10];
-    int Fig_value;
+    int Fig_value[8];
     bool is_end;
 
     void setID(int ID);
