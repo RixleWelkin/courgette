@@ -222,6 +222,11 @@ void Menu::setend(bool ends)
     is_end = ends;
 }
 
+void Menu::setvalue()
+{
+    fig_value = 0;
+}
+
 void Menu::setlines(std::string **lines)
 {
     std::string *line;
@@ -244,39 +249,8 @@ void Menu::print_menu()
     std::cout<<menu_line[9]<<" : "<<std::endl;
     for(int i = 1; menu_line[i] != "0"; i++)
         std::cout<<i<<" : "<<menu_line[i]<<std::endl;
-    std::cout<<std::endl<<"0 : Return"<<std::endl<<std::endl;
-}
-
-void Menu::assign_value(int user_input, Menu *menu_list)
-{
-    switch (menu_ID)
-    {
-            break;
-        case 1 :
-            menu_list[0].Fig_value[0] = user_input;
-            break;
-        case 2 :
-            menu_list[0].Fig_value[1] = user_input;
-            break;
-        case 6 :
-            menu_list[0].Fig_value[2] = user_input;
-            break;
-        case 7 :
-            menu_list[0].Fig_value[3] = user_input;
-            break;
-        case 8 :
-            menu_list[0].Fig_value[4] = user_input;
-            break;
-        case 9 :
-            menu_list[0].Fig_value[5] = user_input;
-            break;
-        case 10 :
-            menu_list[0].Fig_value[6] = user_input;
-            break;
-        case 11 :
-            menu_list[0].Fig_value[7] = user_input;
-            break;
-    }
+    if(is_end == false)
+        std::cout<<std::endl<<"0 : Return"<<std::endl<<std::endl;
 }
 
 int Menu::get_user_choice()
@@ -315,8 +289,10 @@ int Menu::menu_switch(int user_input)
             else
                 return 11;
             break;
+        default :
+            return user_input;
+            break;
     }
-    return 0;
 }
 
 bool Menu::start_menu(Menu *menu_list)
@@ -328,7 +304,7 @@ bool Menu::start_menu(Menu *menu_list)
 
     if(is_end == true)
     {
-        assign_value(user_input, menu_list);
+        fig_value = user_input;
         return false;
     }
 
@@ -336,12 +312,8 @@ bool Menu::start_menu(Menu *menu_list)
         return false;
     else
     {
-        std::cout<<std::endl<<"user input pre switch = "<<user_input<<std::endl<<std::endl;
-        std::cout<<std::endl<<"menu ID pre switch = "<<menu_ID<<std::endl<<std::endl;
         next_menu = menu_switch(user_input);
-        std::cout<<std::endl<<"user input post switch = "<<user_input<<std::endl<<std::endl;
-        std::cout<<std::endl<<"menu_ID post switch = "<<menu_ID<<std::endl<<std::endl;
-        retour = menu_list[user_input].start_menu(menu_list);
+        retour = menu_list[next_menu].start_menu(menu_list);
     }
 
     if(retour == false)
@@ -378,22 +350,16 @@ int main(int argc, char **argv)
         menu_list[i].setID(IDs[i]);
         menu_list[i].setlimit(limits[i]);
         menu_list[i].setend(ends[i]);
+        menu_list[i].setvalue();
         menu_list[i].setlines(&lines[i]);
     }
 
     menu_list[0].start_menu(menu_list);
 
-
-    std::cout<<std::endl<<std::endl
-    <<std::endl<<"Fig_Type = "<<Fig_Type
-    <<std::endl<<"Fig_Orientation = "<<Fig_Orientation
-    <<std::endl<<"Fig_HPosition = "<<Fig_HPosition
-    <<std::endl<<"Fig_VPossition = "<<Fig_VPossition
-    <<std::endl<<"Fig_Width = "<<Fig_Width
-    <<std::endl<<"Fig_Height = "<<Fig_Height
-    <<std::endl<<"Im_Width = "<<Im_Width
-    <<std::endl<<"Im_Height = "<<Im_Height
-    <<std::endl<<std::endl;
-
+    std::cout<<std::endl;
+    for(int i = 0; i < 12; i++)
+        std::cout<<menu_list[i].fig_value<<std::endl;
+    std::cout<<std::endl;
+    
     return 0;
 }
