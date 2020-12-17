@@ -1,14 +1,19 @@
 #ifndef FIGURE_H
 #define FIGURE_H
-class Figure {
+#include <string>
+#include <vector>
+#include "Point.h"
+#include "Segment.h"
+#include "Drawing.h"
+class Figure : public Drawing{
 public:
-  Figure(const int width, const int height);
-
+  Figure(const int largeur, const int hauteur);
   ~Figure();
-
+  const int largeur;
+  const int hauteur;
   void draw() const;
-  void drawPoint(const Point &point, const float thickness);
-  void drawSegment(const Segment &segment, const float thickness);
+ void drawPoint(const Point &point, const float thickness);
+ void drawSegment(const Segment &segment, const float thickness);
 
 protected:
   bool setPoint(const int col, const int line);
@@ -17,10 +22,10 @@ protected:
   bool drawVertLine(const int col);
   bool drawHorLine(const int line);
 
-protected:
-  int width;
-  int height;
+public : 
   std::vector<char> figure;
+private:
+  Drawing *FigureMember;
 };
 
 #endif /* FIGURE_H */

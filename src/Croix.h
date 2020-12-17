@@ -7,5 +7,7 @@ public:
   void draw() const {
     Figure::draw();
   }
+  public :
+    using Figure::figure;
 };
 #endif /* CROIX_H */

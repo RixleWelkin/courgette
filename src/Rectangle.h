@@ -2,7 +2,7 @@
 #define RECTANGLE_H
 class Rectangle : public Figure {
 public:
-  Rectangle(const int width, const int height);
+  Rectangle(const int largeur, const int hauteur);
 
   void draw() const {
     Figure::draw();

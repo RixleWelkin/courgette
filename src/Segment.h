@@ -1,3 +1,5 @@
+#ifndef SEGMENT_H
+#define SEGMENT_H
 class Segment {
 public:
   Segment(const Point &a, const Point &b);
@@ -10,5 +12,4 @@ public:
 private:
   Point org, ext;
 };
-
-
+#endif /* SEGMENT_H */
